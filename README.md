@@ -73,12 +73,12 @@ Key Concepts of a StorageClass
   Ans:
     Actually, Amazon EKS does **not** use Calico as its default network. By default, EKS uses the **Amazon VPC CNI plugin**.
 
-    Here is a breakdown of the type of network EKS uses by default, and why you might be seeing or hearing about Calico in EKS environments.
+  Here is a breakdown of the type of network EKS uses by default, and why you might be seeing or hearing about Calico in EKS environments.
 
-    ### 1. The Default: Amazon VPC CNI (Native Networking)
+  ### 1. The Default: Amazon VPC CNI (Native Networking)
 
-    Out of the box, EKS relies on native AWS networking rather than creating a virtual overlay network.
+  Out of the box, EKS relies on native AWS networking rather than creating a virtual overlay network.
 
-    * **Native IP Assignment:** The VPC CNI plugin assigns actual, routable IP addresses directly from your AWS VPC subnets to your Pods.
-    * **How it works (ENIs):** The plugin attaches Elastic Network Interfaces (ENIs) to your EC2 worker nodes. It then grabs a "warm pool" of secondary IP addresses from           that ENI and assigns them one-by-one to the containers inside your pods.
+  * **Native IP Assignment:** The VPC CNI plugin assigns actual, routable IP addresses directly from your AWS VPC subnets to your Pods.
+  * **How it works (ENIs):** The plugin attaches Elastic Network Interfaces (ENIs) to your EC2 worker nodes. It then grabs a "warm pool" of secondary IP addresses from           that ENI and assigns them one-by-one to the containers inside your pods.
     * **The Advantage:** Because there is no packet encapsulation (like VXLAN or IP-in-IP), your Pods get raw, bare-metal AWS network performance. They can also communicate         natively with other AWS services like RDS or Application Load Balancers.
